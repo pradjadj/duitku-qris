@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRIS Payment Test</title>
+    <link rel="stylesheet" href="assets/css/duitku-qris.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="duitku-qris-container">
+        <div class="duitku-qris-header">
+            <h2>Silahkan Scan QRIS berikut ini</h2>
+        </div>
+
+        <div class="duitku-qris-amount">
+            Nominal Pembayaran: Rp 150,000
+        </div>
+
+        <div id="duitku-qris-qrcode"></div>
+
+        <div id="duitku-qris-timer">
+            Batas waktu pembayaran: 10:00
+        </div>
+
+        <div id="duitku-qris-status"></div>
+
+        <div class="duitku-qris-instructions">
+            <h3>Cara Pembayaran:</h3>
+            <ol>
+                <li>Buka aplikasi e-wallet atau mobile banking yang mendukung QRIS</li>
+                <li>Pilih menu Scan QR atau QRIS</li>
+                <li>Scan QR Code yang ditampilkan di atas</li>
+                <li>Periksa detail transaksi pada aplikasi Anda</li>
+                <li>Masukkan PIN atau password untuk konfirmasi pembayaran</li>
+                <li>Pembayaran selesai, halaman akan otomatis dialihkan</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Test QR string
+        var qrString = "00020101021226660014ID.DANA.WWW011893600911002151500102152006170915150010303UME51450015ID.OR.GPNQR.WWW02150000000000000000303UME520454995802ID5911Toko Jualan6013Jakarta Barat61051153062210117LQKI2LPMJQPKCIIS553033605405400006304502A";
+        var orderId = "123";
+        var expiryTime = Math.floor(Date.now() / 1000) + 600; // 10 minutes from now
+
+        // Initialize QR code on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            new QRCode(document.getElementById("duitku-qris-qrcode"), {
+                text: qrString,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Start timer
+            var timerElement = document.getElementById('duitku-qris-timer');
+            var timerInterval = setInterval(function() {
+                var now = Math.floor(Date.now() / 1000);
+                var timeLeft = expiryTime - now;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerHTML = 'Waktu pembayaran telah berakhir';
+                    document.getElementById('duitku-qris-status').innerHTML = 
+                        '<div class="woocommerce-notice woocommerce-notice--error">Waktu pembayaran telah berakhir. Silakan buat pesanan baru.</div>';
+                    return;
+                }
+
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+                timerElement.innerHTML = 'Sisa waktu: ' + 
+                    minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            }, 1000);
+
+            // Simulate payment success after 5 seconds (for testing)
+            setTimeout(function() {
+                document.getElementById('duitku-qris-status').innerHTML = 
+                    '<div class="woocommerce-notice woocommerce-notice--success">Pembayaran berhasil! Mengalihkan...</div>';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

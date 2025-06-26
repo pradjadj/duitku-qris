@@ -43,18 +43,15 @@ A WooCommerce payment gateway integration for Duitku QRIS that allows customers 
 2. **API Key**: Your Duitku API key
 3. **Environment**: Choose between Sandbox (testing) and Production
 4. **QRIS Provider**: Select your preferred QRIS provider
-5. **Expiry Period**: Set the payment expiry time in minutes
+5. **Merchant Order ID Prefix**: Prefix for tracking your Transaction at Duitku Dashboard, like TRX-12345
+6. **Expiry Period**: Set the payment expiry time in minutes
+7. **Order Status After Payment**: Choose the order status after successful payment. Processing or directly to Completed after Payment
 
 ### Optional Settings
 
-- **Enable Logging**: Toggle error logging in WooCommerce System Status
 - **Title**: Change the payment method title shown to customers
 - **Description**: Modify the payment method description
-
-## Callback URL
-
-Configure your Duitku merchant account with this callback URL:
-`[your-site-url]/?duitku_callback=1`
+- **Enable Logging**: Toggle error logging in WooCommerce System Status
 
 ## Testing
 

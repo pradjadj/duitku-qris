@@ -28,7 +28,7 @@ Plugin WordPress untuk integrasi payment gateway Duitku dengan WooCommerce, mend
 
 ## Instalasi
 
-1. Download dan Upload plugin ke `/wp-content/plugins/duitku-qris`
+1. Download file zip dan Upload plugin ke `/wp-content/plugins/[duitku-qris]` atau upload zip via Plugin WordPress admin
 2. Aktifkan plugin melalui WordPress admin
 3. Konfigurasi settingan di WooCommerce > Settings > Payments > "Duitku QRIS"
 

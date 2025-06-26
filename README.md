@@ -82,7 +82,7 @@ Errors are logged in WooCommerce > Status > Logs with the source "duitku_qris"
 ## Support
 
 For support:
-- Email: support@duitku.com
+- Email: support@sgnet.co.id
 - Documentation: https://docs.duitku.com/api/id/?php#permintaan-transaksi
 
 ## License

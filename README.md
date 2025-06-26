@@ -1,43 +1,40 @@
 # Duitku QRIS Gateway for WooCommerce
 
-A WooCommerce payment gateway integration for Duitku QRIS that allows customers to pay using QRIS directly on the checkout page without redirection.
+Plugin WordPress untuk integrasi payment gateway Duitku dengan WooCommerce, mendukung QRIS dari 5 Provider yang didukung Duitku.
 
-## Features
+## Fitur
 
-- Direct QRIS payment on checkout/order received page
-- Supports multiple QRIS providers:
+- Memunculkan QRIS dihalaman checkout langsung tanpa redirect ke halaman Duitku
+- Pilihan QRIS providers yang didukung Duitku:
   - QRIS ShopeePay (SP)
   - QRIS NobuBank (NQ)
   - QRIS DANA (DQ)
   - QRIS Gudang Voucher (GQ)
   - QRIS Nusapay (SQ)
-- Real-time payment status updates (3-second intervals)
-- Automatic order status management
-- Configurable payment expiry time
-- Error logging in WooCommerce System Status
-- Modern black & white UI design
-- Compatible with HPOS (High-Performance Order Storage)
+- Real-time payment status updates per 3 detik
+- Otomatis mengganti status order ke Processing atau langsung ke Completed setelah pembayaran
+- Setting waktu Payment Expired
+- Error logging di WooCommerce System Status
+- Plugin Kompatibel dengan HPOS (High-Performance Order Storage)
 - Supports PHP 8.0+
-- Compatible with WooCommerce 6.8+ and WordPress 6.8+
+- Kompatibel dengan WooCommerce 6.8+ and WordPress 6.8+
 
-## Requirements
+## Persyaratan
 
-- PHP version 8.0 or higher
-- WordPress 6.8 or higher
-- WooCommerce 6.8 or higher
-- SSL Certificate (for production use)
-- Duitku merchant account and API credentials
+- WordPress 6.0+
+- WooCommerce 8.0+
+- PHP 8.0+
+- Akun merchant Duitku aktif
 
-## Installation
+## Instalasi
 
-1. Upload the plugin files to `/wp-content/plugins/duitku-qris-gateway` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to WooCommerce > Settings > Payments
-4. Click on "Duitku QRIS" to configure the payment gateway
+1. Download dan Upload plugin ke `/wp-content/plugins/duitku-qris`
+2. Aktifkan plugin melalui WordPress admin
+3. Konfigurasi settingan di WooCommerce > Settings > Payments > "Duitku QRIS"
 
-## Configuration
+## Konfigurasi
 
-### Required Settings
+### Settingan yang dibutuhkan
 
 1. **Merchant Code**: Your Duitku merchant code
 2. **API Key**: Your Duitku API key
@@ -47,7 +44,7 @@ A WooCommerce payment gateway integration for Duitku QRIS that allows customers 
 6. **Expiry Period**: Set the payment expiry time in minutes
 7. **Order Status After Payment**: Choose the order status after successful payment. Processing or directly to Completed after Payment
 
-### Optional Settings
+### Settingan tambahan
 
 - **Title**: Change the payment method title shown to customers
 - **Description**: Modify the payment method description
@@ -56,31 +53,31 @@ A WooCommerce payment gateway integration for Duitku QRIS that allows customers 
 ## Testing
 
 ### Sandbox Testing
-1. Set Environment to "Sandbox"
-2. Use the sandbox credentials from your Duitku account
-3. Test transactions using the QRIS test QR codes provided by Duitku
+1. Ganti Environment ke "Sandbox"
+2. Pakai credential Sandbox Duitku
+3. Test transakti pakai Provider QRIS ShopeePay dan jangan lupa aktifkan QRIS ShopeePay di Dashboard Sandbox Duitku
 
-### Production
-1. Set Environment to "Production"
-2. Update the credentials with your live Duitku merchant account details
-3. Perform a test transaction to ensure everything works correctly
+### Production Live
+1. Ganti Environment ke "Production"
+2. Pakai credential Prodiction Duitku
+3. Jalankan transaksi QRIS dan pilih Provider QRIS yang aktif di Dashboard Production Duitku
 
 ## Error Logging
 
-Errors are logged in WooCommerce > Status > Logs with the source "duitku_qris"
+Cek Error Log di WooCommerce > Status > Logs dengan nama source "duitku_qris"
 
-## Order Statuses
+## Status Order
 
-- **Pending Payment**: Initial status when QRIS code is generated
-- **Processing/Completed**: After successful payment
-- **Cancelled**: When payment expires
-- **Failed**: If payment fails
+- **Pending Payment**: QRIS Belum terbayar
+- **Processing/Completed**: Pembayaran diterima
+- **Cancelled**: Pembayaran Dibatalkan karena Expired
+- **Failed**: Pesanan Gagal
 
 ## Support
 
-For support:
+Untuk dukungan plugin bisa hubungi:
 - Email: support@sgnet.co.id
-- Documentation: https://docs.duitku.com/api/id/?php#permintaan-transaksi
+- Dokumentasi link Duitku di: https://docs.duitku.com/api/id/?php#permintaan-transaksi
 
 ## License
 

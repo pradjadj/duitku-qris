@@ -478,18 +478,18 @@ function init_duitku_qris_gateway() {
                         
                         echo '<div class="duitku-qris-container" style="text-align: center; margin: 20px 0;">';
                         echo '<div id="duitku-qris-content">';
-                        echo '<h3>Scan QRIS to Complete Payment</h3>';
+                        echo '<h3>Scan QRIS untuk Pembayaran</h3>';
                         
                         echo '<div id="duitku-qris-qrcode" style="display: inline-block; margin: 0 auto;"></div>';
                         
                         echo '<div id="duitku-countdown" style="margin: 15px 0; font-weight: bold; color: #d63638;">';
-                        echo 'Complete payment within: <span id="duitku-countdown-timer">' . gmdate("i:s", $time_left) . '</span>';
+                        echo 'Selesaikan pembayaran dalam: <span id="duitku-countdown-timer">' . gmdate("i:s", $time_left) . '</span>';
                         echo '</div>';
                         
-                        echo '<p>Please scan the QR code above using a mobile banking or e-wallet app that supports QRIS.</p>';
+                        echo '<p>Silakan scan QR code di atas menggunakan aplikasi mobile banking atau e-wallet yang mendukung QRIS.</p>';
                         
                         echo '<button id="duitku-refresh-page" class="button alt" style="margin: 10px 0; padding: 10px 20px; font-size: 1.2em;">';
-                        echo 'Refresh Payment Status';
+                        echo 'Refresh Status Pembayaran';
                         echo '</button>';
                         echo '</div>';
                         

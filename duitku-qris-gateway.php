@@ -81,54 +81,6 @@ function init_duitku_qris_gateway() {
                 return array_merge($plugin_links, $links);
             }
             add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'duitku_qris_plugin_action_links');
-
-            function add_duitku_qris_gateway($methods) {
-                $methods[] = 'WC_Duitku_QRIS_Gateway';
-                return $methods;
-            }
-
-            add_filter('woocommerce_payment_gateways', 'add_duitku_qris_gateway');
-
-            function duitku_qris_check_payment_status_ajax() {
-                check_ajax_referer('duitku_qris_check_payment_nonce', 'security');
-                
-                $order_id = isset($_POST['order_id']) ? absint($_POST['order_id']) : 0;
-                $order = wc_get_order($order_id);
-                
-                if (!$order) {
-                    wp_send_json_error(array('message' => 'Order not found'));
-                    return;
-                }
-                
-                $paid = $order->is_paid();
-                $expired = false;
-                
-                if (!$paid) {
-                    $expiry = $order->get_meta('_duitku_expiry');
-                    if ($expiry && time() > $expiry && $order->has_status('pending')) {
-                        sleep(rand(1, 5));
-                        wc_increase_stock_levels($order->get_id());
-                        $order->update_status(
-                            'cancelled', 
-                            sprintf(
-                                'QRIS payment expired (expiry time: %s)',
-                                date('Y-m-d H:i:s', $expiry)
-                            )
-                        );
-                        $expired = true;
-                    }
-                }
-                
-                wp_send_json_success(array(
-                    'paid' => $paid,
-                    'expired' => $expired,
-                    'message' => $paid ? 'Payment received' : 
-                            ($expired ? 'Payment time expired' : 'Waiting for payment')
-                ));
-            }
-
-            add_action('wp_ajax_duitku_qris_check_payment', 'duitku_qris_check_payment_status_ajax');
-            add_action('wp_ajax_nopriv_duitku_qris_check_payment', 'duitku_qris_check_payment_status_ajax');
         }
         
         public function enqueue_scripts() {
